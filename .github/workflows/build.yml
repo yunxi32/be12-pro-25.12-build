@@ -56,8 +56,7 @@ jobs:
           cd openwrt
           cp defconfig/low-mem-512m/mt7987-mt7992-be7200.config .config
           cat ../extra.config >> .config
-          ./scripts/config --disable TARGET_DEVICE_mediatek_filogic_DEVICE_routerich_be7200
-          ./scripts/config --enable TARGET_DEVICE_mediatek_filogic_DEVICE_tenda_be12-pro
+          sed -i '/^CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_routerich_be7200=/d' .config
           make defconfig
           python3 - <<'PY'
           from pathlib import Path
