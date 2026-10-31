@@ -58,6 +58,8 @@ jobs:
           cd openwrt
           cp defconfig/low-mem-512m/mt7987-mt7992-be7200.config .config
           cat ../extra.config >> .config
+          # GNU tar's virtual xz dependency needs an explicit provider in this feed.
+          echo CONFIG_PACKAGE_xz-utils=y >> .config
           sed -i '/^CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_routerich_be7200=/d' .config
           make defconfig
           python3 - <<'PY'
