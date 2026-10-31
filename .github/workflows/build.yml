@@ -44,6 +44,8 @@ jobs:
           EOF
           ./scripts/feeds update -a
           ./scripts/feeds install -a
+          # The pinned LuCI feed's unused WeeChat app has a recursive dependency.
+          rm -f package/feeds/luci/luci-app-weechat
           {
             git rev-parse HEAD
             for feed in packages luci routing istore; do
@@ -116,5 +118,8 @@ jobs:
             openwrt/build.log
             openwrt/build.diffconfig
             openwrt/build-revisions.txt
+            openwrt/.config
+            openwrt/tmp/.config-package.in
             openwrt/logs/
           retention-days: 7
+          include-hidden-files: true
